@@ -1,0 +1,18 @@
+version: '3'
+services:
+  nuxt-app:
+      build: ./live2dproject  # Dockerfileの場所
+      working_dir: /src  # ホストOSとコンテナ内でソースコードを共有する
+      volumes:
+        - .:/src
+      command: bash -c "cd live2dproject && yarn && yarn dev"
+      ports:
+        - 3200:3000   # コンテナ内部の3000を外部から5000でアクセスする
+      tty: true   # コンテナ起動後、StatusがExitにならないようttyの設定
+  flask-app:
+      build: ./chatgpt_py
+      command: python3 app/main.py
+      volumes:
+        - ./app:/app
+      ports:
+        - 6400:6200
