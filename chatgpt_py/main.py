@@ -12,7 +12,6 @@ app = Flask(__name__)
 CORS(app)
 
 chatGPT = chatgpt.GPT()
-ransack = voice.Ransack()
 #sched = BlockingScheduler(daemon=True)
 
 print("BOTを起動しています。")
@@ -36,7 +35,6 @@ class Converter:
         if self.flag == 1:
             #ポイントをチャージします。
             print('ポイントをチャージします。')
-            voice.Voicevox(ransack.go())
 
 
     def WordToVoice(self,text):
@@ -67,7 +65,6 @@ def charge_point():
     if converter.flag == 1:
         #ポイントをチャージします。
         print('ポイントをチャージします。')
-        voice.Voicevox(ransack.go())
 
 
 @app.route('/')
@@ -97,15 +94,6 @@ def messages():
     msg = request.json['message']
 
     return jsonify({"response_message":msg})
-
-#@sched.scheduled_job('interval', seconds=30)
-def charge_point():
-    #もしフラグが立っているのであれば実行する
-    print("FLAG IS ACTIVE.")
-    if converter.flag == 1:
-        #ポイントをチャージします。
-        print('ポイントをチャージします。')
-        voice.Voicevox(ransack.go())
 
 
 #sched.start()#定期実行のために必要なモジュールを起動

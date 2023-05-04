@@ -8,4 +8,3 @@ RUN pip3 install flask
 COPY requirements.txt /
 RUN pip3 install -r requirements.txt
 
-RUN mkdir /app
