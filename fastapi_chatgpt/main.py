@@ -1,12 +1,21 @@
 #モジュール部品
 from pydantic import BaseModel
 from fastapi import FastAPI
+from starlette.middleware.cors import CORSMiddleware # 追加
 import chatgpt
 import time
 import voice
 import uvicorn
 app = FastAPI()
 api = "/api"
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["http://localhost:3000","https://ai-chara.web.app"],
+    allow_credentials=True,   # 追記により追加
+    allow_methods=["*"],      # 追記により追加
+    allow_headers=["*"]       # 追記により追加
+)
 
 #chatGPTのリクエストシステム
 chatGPT = chatgpt.GPT()
